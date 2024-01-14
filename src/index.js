@@ -1,17 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import PokemonDetail from './components/PokemonDetail';
+import MyPokemon from './components/MyPokemon';
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container);
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Router>
+    <Routes>
+      <Route path="/" element={<App tab="home" />} />
+      <Route path="/pokemon-list" element={<App tab="pokemon-list" />} />
+      <Route path="/pokemon-list/:pokemonName" element={<PokemonDetail />} />
+      <Route path="/my-pokemon" element={<MyPokemon />} />
+    </Routes>
+  </Router>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
